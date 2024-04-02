@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modelo &mdash; documentación de MiProyecto - 0.0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=6fcc102b"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=efdbd0b9"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MiProyecto
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../primeros%20pasos.html">primeros pasos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">modelo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MiProyecto</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">modelo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para modelo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Este archivo constituye el MODELO de la aplicacion.&quot;&quot;&quot;</span>
+
+<span class="c1"># Se importan las librerias necesarias.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageTk</span><span class="p">,</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="n">SqliteDatabase</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">,</span> <span class="n">FloatField</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Se indican variables globales.</span>
+
+<span class="sd">:var ruta: Indica la ruta de &quot;modelo.py&quot;.</span>
+<span class="sd">:var ruta_marcha: Indica la ruta de &quot;marcha.png&quot;.</span>
+<span class="sd">:var ruta_base: Indica la ruta de &quot;mibase.db&quot;.</span>
+<span class="sd">:var ruta_log: Umdica la ruta de &quot;log.txt&quot;.</span>
+<span class="sd">:var hora_r: Indica la fecha y hora actual.</span>
+<span class="sd">:var db: Apunta a la Base de Datos.</span>
+
+<span class="sd">Describe las rutas del grafico, de la base de datos y registro de errores.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">global</span> <span class="n">ruta</span><span class="p">,</span> <span class="n">ruta_marcha</span><span class="p">,</span> <span class="n">ruta_base</span><span class="p">,</span> <span class="n">ruta_log</span><span class="p">,</span> <span class="n">hora_r</span><span class="p">,</span> <span class="n">db</span>
+<span class="n">ruta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">((</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span>
+<span class="n">ruta_marcha</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ruta</span><span class="p">,</span>
+                        <span class="s2">&quot;marcha.png&quot;</span><span class="p">)</span>
+<span class="n">ruta_base</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ruta</span><span class="p">,</span>
+                        <span class="s2">&quot;mibase.db&quot;</span><span class="p">)</span>
+<span class="n">ruta_log</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ruta</span><span class="p">,</span>
+                        <span class="s2">&quot;log.txt&quot;</span><span class="p">)</span>
+<span class="n">hora_r</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SqliteDatabase</span><span class="p">(</span><span class="n">ruta_base</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BaseModel">
+<a class="viewcode-back" href="../modelo.html#modelo.BaseModel">[documentos]</a>
+<span class="k">class</span> <span class="nc">BaseModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Se crea la Base de Datos.&quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se realiza la asignacion de la Base de Datos.</span>
+<span class="sd">        </span>
+<span class="sd">        :var database: Orientada a la Base de Datos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">db</span></div>
+
+
+
+<div class="viewcode-block" id="Database">
+<a class="viewcode-back" href="../modelo.html#modelo.Database">[documentos]</a>
+<span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Se genera la tabla con sus campos y restricciones.</span>
+<span class="sd">    </span>
+<span class="sd">    :var hora: Guarda la hora en el campo homonimo de la tabla.</span>
+<span class="sd">    :var temperatura: Guarda la temperatura en el campo homonimo de la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">hora</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">temperatura</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="conexion">
+<a class="viewcode-back" href="../modelo.html#modelo.conexion">[documentos]</a>
+<span class="k">def</span> <span class="nf">conexion</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Se verifica en el directorio si la base ya está creada o si hay que crearla.</span>
+
+<span class="sd">    :var files: busca en el directorio archivos con terminacion &quot;.db&quot;.</span>
+
+<span class="sd">    Se conecta/crea la base de datos y la tabla.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">ruta</span> <span class="o">+</span> <span class="s1">&#39;/*.db&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">files</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Database</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Crud">
+<a class="viewcode-back" href="../modelo.html#modelo.Crud">[documentos]</a>
+<span class="k">class</span> <span class="nc">Crud</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Se realiza la clase y metodos que se utilizan desde Vista.</span>
+
+<span class="sd">    Se definen los metodos de alta, modificacion,</span>
+<span class="sd">    baja y consulta de registro. Además del graficado de los datos.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Crud.alta">
+<a class="viewcode-back" href="../modelo.html#modelo.Crud.alta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">alta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">hora</span><span class="p">,</span> <span class="n">temperatura</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se ingresa con los datos de hora y temperatura.</span>
+<span class="sd">        </span>
+<span class="sd">        :param master: Ventana de tkinter.</span>
+<span class="sd">        :param hora: Numero Natural que indica el horario en hora UTC.</span>
+<span class="sd">        :param temperatura: Numero Real que indica la tempratura de la hora.</span>
+
+<span class="sd">        Luego se verifica el formato,</span>
+<span class="sd">        se asigna al registro correspondiente,</span>
+<span class="sd">        y se acusa recibo por pantalla.</span>
+
+<span class="sd">        Si el formato no es correcto se informa al usuario por pantalla.</span>
+<span class="sd">        Si se detecta un error, se toma nota del mismo en un archivo de texto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cadena_h</span> <span class="o">=</span> <span class="n">hora</span>
+            <span class="n">cadena_t</span> <span class="o">=</span> <span class="n">temperatura</span>
+            <span class="c1"># Se define regex numerico,signo &quot;-&quot; y punto decimal &quot;.&quot;</span>
+            <span class="n">patron</span> <span class="o">=</span> <span class="s2">&quot;^[0-9 \. \-]*$&quot;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cadena_h</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cadena_t</span><span class="p">)):</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">dato</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+                <span class="n">dato</span><span class="o">.</span><span class="n">hora</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span>
+                <span class="n">dato</span><span class="o">.</span><span class="n">temperatura</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temperatura</span><span class="p">)</span>
+                <span class="n">dato</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Alta &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; HOA: con exito.&quot;</span><span class="p">)</span>
+                <span class="n">noti_exi</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                               <span class="n">y</span><span class="o">=</span><span class="mi">570</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error en campo\s hora y\o temperatura&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_log</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hora_r</span><span class="o">+</span><span class="s2">&quot;. Existe valor de &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; UTC.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Crud.modificacion">
+<a class="viewcode-back" href="../modelo.html#modelo.Crud.modificacion">[documentos]</a>
+    <span class="k">def</span> <span class="nf">modificacion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">hora</span><span class="p">,</span> <span class="n">temperatura</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se ingresa con los datos de hora y temperatura.</span>
+
+<span class="sd">        :param master: Ventana de tkinter.</span>
+<span class="sd">        :param hora: Numero Natural que indica el horario en hora UTC.</span>
+<span class="sd">        :param temperatura: Numero Real que indica la tempratura de la hora.</span>
+
+<span class="sd">        Luego se verifica el formato,</span>
+<span class="sd">        se asigna al registro correspondiente,</span>
+<span class="sd">        y se acusa recibo por pantalla.</span>
+
+<span class="sd">        Si el formato no es correcto se informa al usuario por pantalla.</span>
+<span class="sd">        Si se detecta un error, se toma nota del mismo en un archivo de texto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cadena_h</span> <span class="o">=</span> <span class="n">hora</span>
+            <span class="n">cadena_t</span> <span class="o">=</span> <span class="n">temperatura</span>
+            <span class="c1"># Se define regex numerico,signo &quot;-&quot; y punto decimal &quot;.&quot;</span>
+            <span class="n">patron</span> <span class="o">=</span> <span class="s2">&quot;^[0-9 \. \-]*$&quot;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cadena_h</span><span class="p">)</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cadena_t</span><span class="p">)):</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temperatura</span><span class="p">)</span>
+                <span class="n">act</span> <span class="o">=</span> <span class="n">Database</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">hora</span><span class="o">=</span><span class="n">h</span><span class="p">,</span>
+                                      <span class="n">temperatura</span><span class="o">=</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Database</span><span class="o">.</span><span class="n">hora</span> <span class="o">==</span> <span class="n">h</span><span class="p">)</span>
+                <span class="n">act</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Mod. &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; HOA: con exito.&quot;</span><span class="p">)</span>
+                <span class="n">noti_exi</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                               <span class="n">y</span><span class="o">=</span><span class="mi">570</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error en campo\s hora y\o temperatura&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_log</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hora_r</span><span class="o">+</span><span class="s2">&quot;. No existe valor de &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; UTC.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Crud.baja">
+<a class="viewcode-back" href="../modelo.html#modelo.Crud.baja">[documentos]</a>
+    <span class="k">def</span> <span class="nf">baja</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">hora</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se ingresa con el dato de hora.</span>
+
+<span class="sd">        :param master: Ventana de tkinter.</span>
+<span class="sd">        :param hora: Numero Natural que indica el horario en hora UTC.</span>
+
+<span class="sd">        Luego se verifica el formato,</span>
+<span class="sd">        se asigna al registro correspondiente,</span>
+<span class="sd">        y se acusa recibo por pantalla.</span>
+
+<span class="sd">        Si el formato no es correcto se informa al usuario por pantalla.</span>
+<span class="sd">        Si se detecta un error, se toma nota del mismo en un archivo de texto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cadena_h</span> <span class="o">=</span> <span class="n">hora</span>
+            <span class="c1"># Se define regex numerico</span>
+            <span class="n">patron</span> <span class="o">=</span> <span class="s2">&quot;^[0-9]*$&quot;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cadena_h</span><span class="p">)):</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">hora</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span>
+                <span class="n">borrar</span> <span class="o">=</span> <span class="n">Database</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Database</span><span class="o">.</span><span class="n">hora</span> <span class="o">==</span> <span class="n">hora</span><span class="p">)</span>
+                <span class="n">borrar</span><span class="o">.</span><span class="n">delete_instance</span><span class="p">()</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Baja &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; HOA: con exito.&quot;</span><span class="p">)</span>
+                <span class="n">noti_exi</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                               <span class="n">y</span><span class="o">=</span><span class="mi">570</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error en campo de hora&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_log</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hora_r</span><span class="o">+</span><span class="s2">&quot;. No existe valor de &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; UTC.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Crud.consulta">
+<a class="viewcode-back" href="../modelo.html#modelo.Crud.consulta">[documentos]</a>
+    <span class="k">def</span> <span class="nf">consulta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">,</span> <span class="n">hora</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Se ingresa con el dato de hora.</span>
+
+<span class="sd">        :param master: Ventana de tkinter.</span>
+<span class="sd">        :param hora: Numero Natural que indica el horario en hora UTC.</span>
+
+<span class="sd">        Luego se verifica el formato,</span>
+<span class="sd">        se asigna al registro correspondiente,</span>
+<span class="sd">        y se acusa recibo por pantalla.</span>
+
+<span class="sd">        Si el formato no es correcto se informa al usuario por pantalla.</span>
+<span class="sd">        Si se detecta un error, se toma nota del mismo en un archivo de texto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cadena_h</span> <span class="o">=</span> <span class="n">hora</span>
+            <span class="c1"># Se define regex numerico</span>
+            <span class="n">patron</span> <span class="o">=</span> <span class="s2">&quot;^[0-9]*$&quot;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">patron</span><span class="p">,</span> <span class="n">cadena_h</span><span class="p">)):</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">hora</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span>
+                <span class="n">consulta</span> <span class="o">=</span> <span class="n">Database</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Database</span><span class="o">.</span><span class="n">hora</span> <span class="o">==</span> <span class="n">hora</span><span class="p">)</span>
+                <span class="n">texto1</span> <span class="o">=</span> <span class="s2">&quot;La temperatura de las &quot;</span>
+                <span class="n">texto2</span> <span class="o">=</span> <span class="s2">&quot; HOA es: &quot;</span>
+                <span class="n">texto3</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">consulta</span><span class="o">.</span><span class="n">temperatura</span><span class="p">)</span>
+                <span class="n">texto4</span> <span class="o">=</span> <span class="s2">&quot; ºC.&quot;</span>
+                <span class="n">texto</span> <span class="o">=</span> <span class="n">texto1</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="n">texto2</span><span class="o">+</span><span class="n">texto3</span><span class="o">+</span><span class="n">texto4</span>
+                <span class="n">noti_cons</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                     <span class="n">text</span><span class="o">=</span><span class="n">texto</span><span class="p">)</span>
+                <span class="n">noti_cons</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span>
+                                <span class="n">y</span><span class="o">=</span><span class="mi">570</span><span class="p">)</span>
+                <span class="n">noti_exi</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Con. &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; HOA: con exito.&quot;</span><span class="p">)</span>
+                <span class="n">noti_exi</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                               <span class="n">y</span><span class="o">=</span><span class="mi">570</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error en campo de hora&quot;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_log</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hora_r</span><span class="o">+</span><span class="s2">&quot;. No existe valor de &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hora</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; UTC.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Crud.graficado">
+<a class="viewcode-back" href="../modelo.html#modelo.Crud.graficado">[documentos]</a>
+    <span class="k">def</span> <span class="nf">graficado</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Genera (o toma si se encuentra generado) el archivo marcha.png.</span>
+
+<span class="sd">        :param master: Ventana de tkinter.</span>
+
+<span class="sd">        Si el archivo se genero o no existe el archivo,</span>
+<span class="sd">        se toma nota del error y se registra en un archivo de texto.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">global</span> <span class="n">ruta_marcha</span><span class="p">,</span> <span class="n">image3</span><span class="p">,</span> <span class="n">image4</span><span class="p">,</span> <span class="n">marcha_label</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">24</span><span class="p">))</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span><span class="o">*</span><span class="mi">24</span>
+            <span class="n">registros</span> <span class="o">=</span> <span class="n">Database</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>
+            <span class="c1"># Se vuelcan los valores de temperatura en la lista &quot;y&quot;</span>
+            <span class="k">for</span> <span class="n">registro</span> <span class="ow">in</span> <span class="n">registros</span><span class="p">:</span>
+                <span class="n">hora</span> <span class="o">=</span> <span class="n">registro</span><span class="o">.</span><span class="n">hora</span>
+                <span class="n">y</span><span class="p">[</span><span class="n">hora</span><span class="p">]</span> <span class="o">=</span> <span class="n">registro</span><span class="o">.</span><span class="n">temperatura</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
+                                   <span class="mi">1</span><span class="p">,</span>
+                                   <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.4</span><span class="p">,</span>
+                                            <span class="mf">1.5</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">23</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tiempo [horas (HOA)]&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperatura [ºC]&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">ruta_marcha</span><span class="p">,</span>
+                        <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                        <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+            <span class="c1"># Se incorpora el grafico en la ventana grafica</span>
+            <span class="n">image4</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">ruta_marcha</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">image4</span><span class="p">)</span>
+            <span class="n">image3</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">image4</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">image3</span><span class="p">)</span>
+            <span class="n">marcha_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">master</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">image3</span><span class="p">)</span>
+            <span class="n">marcha_label</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span>
+                               <span class="n">y</span><span class="o">=</span><span class="mi">365</span><span class="p">,</span>
+                               <span class="n">relwidth</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span>
+                               <span class="n">relheight</span><span class="o">=</span><span class="mf">0.30</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">image3</span><span class="p">,</span> <span class="n">image4</span><span class="p">,</span> <span class="n">marcha_label</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ruta_log</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hora_r</span><span class="o">+</span><span class="s1">&#39;. No existe archivo &quot;marcha.png&quot;.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, Fabricio Lopretto.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

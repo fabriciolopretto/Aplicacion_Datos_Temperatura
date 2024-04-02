@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>primeros pasos &mdash; documentación de MiProyecto - 0.0.1</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=6fcc102b"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="main module" href="main.html" />
+    <link rel="prev" title="Welcome to MiProyecto’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MiProyecto
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">primeros pasos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#guia-de-uso">Guía de uso</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelo.html">modelo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MiProyecto</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">primeros pasos</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/primeros pasos.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="primeros-pasos">
+<h1>primeros pasos<a class="headerlink" href="#primeros-pasos" title="Link to this heading"></a></h1>
+<section id="guia-de-uso">
+<h2>Guía de uso<a class="headerlink" href="#guia-de-uso" title="Link to this heading"></a></h2>
+<p>Descripción:
+La aplicación permite almacenar y manipular una base de datos de temperatura horaria de C.A.B.A. para un día determinado, permitiendo al usuario realizar las siguientes acciones:</p>
+<p>1- Agregar datos horarios de temperatura a medida que estos se miden con instrumento.</p>
+<p>2- Consultar un dato de temperatura determinado en una hora determinada.</p>
+<p>3- Modificar un dato de temperatura (por ejemplo si se considera que hubo un error del instrumento y se realizó nuevamente la medición).</p>
+<p>4- Eliminar un dato de temperatura (similar al ejemplo anterior, pero pasó demasiado tiempo como para volver a tomar el dato de esa hora).</p>
+<p>5- Presentar los datos de forma gráfica para analizar.</p>
+<p>Funcionamiento:</p>
+<ol class="arabic">
+<li><p>Al ejecutar la aplicación, la misma abre una ventana indicando las referencias y formato de datos a ingresar. Una vez informado, el usuario la debe cerrar para continuar.</p></li>
+<li><p>Una vez realizado esto, se abre automáticamente la interface de la aplicación.</p></li>
+<li><p>Relativo a los archivos que utiliza la aplicación:</p>
+<p>3.1. Si en el directorio ya existe un archivo «mibase.db», se puede trabajar sobre ella desde un inicio (por ejemplo visualizar el gráfico on consultar datos). Caso contrario, primero habrá que dar de alta al menos un dato o se acentará un error en el registro «log.txt».</p>
+<p>3.2. Si en el directorio ya existe un archivo «mibase.db» y/o «marcha.png», se puede visualizar el gráfico desde un inicio. Caso contrario, primero habrá que dar de alta al menos un valor o se acentará un error en el registro «log.txt».</p>
+</li>
+<li><p>Relativo a las funcionalidades:</p>
+<p>4.1. Alta: Solo se pueden ingresar datos en horas no repetidas, de lo contrario se acentará un error en el registro «log.txt».</p>
+<p>4.2. Modificación: Permite modificar un valor de temperatura en un horario en el que ya exista un registro «log.txt».</p>
+<p>4.3. Baja: Solo se podrá dar de baja registros en horas dadas de alta previamente, caso contrario se acentará un error en el registro «log.txt».</p>
+<p>4.4. Consulta: Solo se podrá dar de consultar registros en horas dadas de alta previamente, caso contrario se acentará un error en el registro «log.txt».</p>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to MiProyecto’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="main.html" class="btn btn-neutral float-right" title="main module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, Fabricio Lopretto.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

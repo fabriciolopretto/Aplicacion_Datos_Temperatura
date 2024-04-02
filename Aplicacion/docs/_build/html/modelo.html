@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modelo module &mdash; documentación de MiProyecto - 0.0.1</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=6fcc102b"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=efdbd0b9"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="vista module" href="vista.html" />
+    <link rel="prev" title="main module" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MiProyecto
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="primeros%20pasos.html">primeros pasos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modelo module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.BaseModel"><code class="docutils literal notranslate"><span class="pre">BaseModel</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.BaseModel.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">BaseModel.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.BaseModel.id"><code class="docutils literal notranslate"><span class="pre">BaseModel.id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.Crud"><code class="docutils literal notranslate"><span class="pre">Crud</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Crud.alta"><code class="docutils literal notranslate"><span class="pre">Crud.alta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Crud.baja"><code class="docutils literal notranslate"><span class="pre">Crud.baja()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Crud.consulta"><code class="docutils literal notranslate"><span class="pre">Crud.consulta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Crud.graficado"><code class="docutils literal notranslate"><span class="pre">Crud.graficado()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Crud.modificacion"><code class="docutils literal notranslate"><span class="pre">Crud.modificacion()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.Database"><code class="docutils literal notranslate"><span class="pre">Database</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Database.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Database.DoesNotExist</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Database.hora"><code class="docutils literal notranslate"><span class="pre">Database.hora</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Database.id"><code class="docutils literal notranslate"><span class="pre">Database.id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Database.temperatura"><code class="docutils literal notranslate"><span class="pre">Database.temperatura</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.conexion"><code class="docutils literal notranslate"><span class="pre">conexion()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MiProyecto</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">modelo module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modelo.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modelo">
+<span id="modelo-module"></span><h1>modelo module<a class="headerlink" href="#module-modelo" title="Link to this heading"></a></h1>
+<p>Este archivo constituye el MODELO de la aplicacion.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelo.BaseModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">BaseModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#BaseModel"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.BaseModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Se crea la Base de Datos.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelo.BaseModel.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#modelo.BaseModel.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModelDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelo.BaseModel.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">BaseModel.id&gt;</span></em><a class="headerlink" href="#modelo.BaseModel.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelo.Crud">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">Crud</span></span><a class="reference internal" href="_modules/modelo.html#Crud"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Crud" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Se realiza la clase y metodos que se utilizan desde Vista.</p>
+<p>Se definen los metodos de alta, modificacion,
+baja y consulta de registro. Además del graficado de los datos.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Crud.alta">
+<span class="sig-name descname"><span class="pre">alta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hora</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperatura</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Crud.alta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Crud.alta" title="Link to this definition"></a></dt>
+<dd><p>Se ingresa con los datos de hora y temperatura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>master</strong> – Ventana de tkinter.</p></li>
+<li><p><strong>hora</strong> – Numero Natural que indica el horario en hora UTC.</p></li>
+<li><p><strong>temperatura</strong> – Numero Real que indica la tempratura de la hora.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Luego se verifica el formato,
+se asigna al registro correspondiente,
+y se acusa recibo por pantalla.</p>
+<p>Si el formato no es correcto se informa al usuario por pantalla.
+Si se detecta un error, se toma nota del mismo en un archivo de texto.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Crud.baja">
+<span class="sig-name descname"><span class="pre">baja</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hora</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Crud.baja"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Crud.baja" title="Link to this definition"></a></dt>
+<dd><p>Se ingresa con el dato de hora.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>master</strong> – Ventana de tkinter.</p></li>
+<li><p><strong>hora</strong> – Numero Natural que indica el horario en hora UTC.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Luego se verifica el formato,
+se asigna al registro correspondiente,
+y se acusa recibo por pantalla.</p>
+<p>Si el formato no es correcto se informa al usuario por pantalla.
+Si se detecta un error, se toma nota del mismo en un archivo de texto.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Crud.consulta">
+<span class="sig-name descname"><span class="pre">consulta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hora</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Crud.consulta"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Crud.consulta" title="Link to this definition"></a></dt>
+<dd><p>Se ingresa con el dato de hora.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>master</strong> – Ventana de tkinter.</p></li>
+<li><p><strong>hora</strong> – Numero Natural que indica el horario en hora UTC.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Luego se verifica el formato,
+se asigna al registro correspondiente,
+y se acusa recibo por pantalla.</p>
+<p>Si el formato no es correcto se informa al usuario por pantalla.
+Si se detecta un error, se toma nota del mismo en un archivo de texto.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Crud.graficado">
+<span class="sig-name descname"><span class="pre">graficado</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Crud.graficado"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Crud.graficado" title="Link to this definition"></a></dt>
+<dd><p>Genera (o toma si se encuentra generado) el archivo marcha.png.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>master</strong> – Ventana de tkinter.</p>
+</dd>
+</dl>
+<p>Si el archivo se genero o no existe el archivo,
+se toma nota del error y se registra en un archivo de texto.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Crud.modificacion">
+<span class="sig-name descname"><span class="pre">modificacion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hora</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperatura</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Crud.modificacion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Crud.modificacion" title="Link to this definition"></a></dt>
+<dd><p>Se ingresa con los datos de hora y temperatura.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>master</strong> – Ventana de tkinter.</p></li>
+<li><p><strong>hora</strong> – Numero Natural que indica el horario en hora UTC.</p></li>
+<li><p><strong>temperatura</strong> – Numero Real que indica la tempratura de la hora.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Luego se verifica el formato,
+se asigna al registro correspondiente,
+y se acusa recibo por pantalla.</p>
+<p>Si el formato no es correcto se informa al usuario por pantalla.
+Si se detecta un error, se toma nota del mismo en un archivo de texto.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelo.Database">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">Database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Database"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Database" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelo.BaseModel" title="modelo.BaseModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></a></p>
+<p>Se genera la tabla con sus campos y restricciones.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hora</strong> – Guarda la hora en el campo homonimo de la tabla.</p></li>
+<li><p><strong>temperatura</strong> – Guarda la temperatura en el campo homonimo de la tabla.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelo.Database.DoesNotExist">
+<span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#modelo.Database.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>alias de <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelo.Database.hora">
+<span class="sig-name descname"><span class="pre">hora</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;IntegerField:</span> <span class="pre">Database.hora&gt;</span></em><a class="headerlink" href="#modelo.Database.hora" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelo.Database.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;AutoField:</span> <span class="pre">Database.id&gt;</span></em><a class="headerlink" href="#modelo.Database.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelo.Database.temperatura">
+<span class="sig-name descname"><span class="pre">temperatura</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;FloatField:</span> <span class="pre">Database.temperatura&gt;</span></em><a class="headerlink" href="#modelo.Database.temperatura" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelo.conexion">
+<span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">conexion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#conexion"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.conexion" title="Link to this definition"></a></dt>
+<dd><p>Se verifica en el directorio si la base ya está creada o si hay que crearla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>files</strong> – busca en el directorio archivos con terminacion «.db».</p>
+</dd>
+</dl>
+<p>Se conecta/crea la base de datos y la tabla.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="main.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="vista.html" class="btn btn-neutral float-right" title="vista module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2024, Fabricio Lopretto.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
